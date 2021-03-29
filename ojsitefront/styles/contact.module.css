@@ -1,8 +1,8 @@
 .title {
-    font-size: 3rem;
-    text-align: center;
+  font-size: 3rem;
+  text-align: center;
 }
 
 .divcontact {
-    @apply box-border w-11/12 max-w-5xl m-auto shadow-md rounded-lg;
+  @apply box-border w-11/12 max-w-5xl m-auto shadow-md rounded-lg;
 }
