@@ -24,3 +24,19 @@ a.over {
 * {
   box-sizing: border-box;
 }
+
+.textOJgreen {
+  color: #10aab0;
+}
+
+.textOJblack {
+  color: #2c2c2c;
+}
+
+.textOJsoulignerVert {
+  text-decoration: underline #10aab0;
+}
+
+.textOJsoulignerNoir {
+  text-decoration: underline #2c2c2c;
+}

@@ -4,5 +4,5 @@
 }
 
 .divcontact {
-  @apply box-border w-11/12 max-w-5xl m-auto shadow-md rounded-lg;
+  @apply box-border w-11/12 max-w-4xl m-auto shadow-md rounded-lg py-3;
 }
