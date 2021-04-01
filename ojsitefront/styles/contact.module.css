@@ -8,7 +8,7 @@
 }
 
 .ojinput {
-  @apply border-gray-500 border rounded-sm w-full;
+  @apply border-ojblack border rounded-sm w-full;
 }
 
 .ojinputNom {
@@ -17,4 +17,12 @@
 
 .ojlabel {
   @apply font-bold;
+}
+
+.ojbouton {
+  @apply h-10 mt-8 mr-5 px-5 float-right text-ojwhite bg-ojblack transition-colors duration-150 rounded-md hover:bg-ojgreen hover:text-ojblack hover:font-bold;
+}
+
+.ojetoilerouge {
+  @apply text-red-700;
 }
