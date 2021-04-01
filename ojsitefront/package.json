@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "bnexport": "next build && next export"
   },
   "dependencies": {
     "@types/lodash": "^4.14.168",

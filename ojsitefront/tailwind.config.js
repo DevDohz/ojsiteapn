@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   purge: [
     // Use *.tsx if using TypeScript
@@ -6,14 +8,19 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
-    divideColor: theme => ({
-      'ojgreen': '#10aab0',
-      'ojblack': '#2c2c2c',      
-     }),
+    extend: {
+      colors: {
+        ojgreen: '#10aab0',
+        ojblack: '#2c2c2c',
+        ojwhite: '#f4f4f4',
+      },
+    },
+    
   },
   variants: {
-    extend: {},
+    extend: {
+      fontWeight: ['hover', 'focus'],
+    },
   },
   plugins: [],
 }
