@@ -192,14 +192,12 @@ export default function Contact() {
   /* Garder pour l'exemple
     if (values.nom.length > 15) {
       errors.nom = 'Ne doit pas dépassé les 15 caractères';
-    }
-  
+    }  
     if (values.prenom.length > 20) {
       errors.prenom = 'Ne doit pas dépassé les 20 caractères';
     }
   */
-    if(errors)
-    {
+    if(errors) {
       document.getElementById('confirmMessage').style.visibility="hidden";
     }
     return errors;
