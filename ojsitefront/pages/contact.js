@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import s from '../styles/contact.module.css'
+import { useFormik } from 'formik';
 
 export default function Contact() {
     return (
@@ -29,9 +30,9 @@ export default function Contact() {
       </div>
 
      {/* Carte Google Maps sur OpenJujitsu */}
-       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.7854620819835!2d-0.6610626842099919!3d44.80556067909877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54d973488db243%3A0xe5e17d0cc266689a!2sOpen%20Jujitsu!5e0!3m2!1sfr!2sfr!4v1616939727833!5m2!1sfr!2sfr" 
+     {/* */} <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.7854620819835!2d-0.6610626842099919!3d44.80556067909877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54d973488db243%3A0xe5e17d0cc266689a!2sOpen%20Jujitsu!5e0!3m2!1sfr!2sfr!4v1616939727833!5m2!1sfr!2sfr" 
         width="95%" height="400" style={{ border: 0 }} allowfullscreen="" loading="lazy" class="m-auto pb-4 pt-4"/>
-    {/* */}
+     
     </div>
     
     {/* Liens réseaux Sociaux */}
@@ -67,9 +68,9 @@ export default function Contact() {
 
       {/* Formulaire de contact */}
       <div className={s.divcontact}>
-        <p className={s.title}>Nous Contacter</p>
-        <p class="text-center">Formulaire de contact</p>
-        <Form />
+        <p className={s.title}>Nous Contacter</p>        
+        <div id="confirmMessage" className={s.confirmMessageOK}>Merci ! Votre message a bien été envoyé.</div>
+        <ContactForm />
       </div>
 
       {/* Faux Footer */}
@@ -82,32 +83,78 @@ export default function Contact() {
     )
   }
 
-  function Form() {
-    const sendContactMessage = event => {
-      event.preventDefault() // don't redirect the page
-      // where we'll add our form logic
+  {/* #########################################
+      ##    Formulaire de Contact            ##
+      #########################################*/}
+  async function sendContactEmail(formValues) { 
+    // Appel l'API d'envoi de mail
+    const resp = await fetch('/api/emailService', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formValues)
+    });
 
-    }
-  
+    return resp; // retourne la promesse en asynchrone
+  }
+
+  function ContactForm() {
+    
+    const formik = useFormik({
+      initialValues: {
+        nom:'',
+        prenom:'',
+        email: '',
+        tel:'',
+        message:'',
+      },
+      validate,
+      onSubmit: values => {
+        // TODO : Checker le reCaptcha !
+
+        // Envoyer le mail de contact
+        sendContactEmail(values)
+          .then( isOk => {            
+            // Réinitialise le Formulaire
+            // alert("onSubmit before if - isOk.status : " + isOk.status + "\n MessId : " + JSON.stringify(isOk)); //TODEL
+            if(isOk.status < 300){
+              // Réinitialise le Formulaire
+              formik.handleReset(); // réinitialise les champs une fois le formulaire validé
+              document.getElementById('confirmMessage').style.visibility="visible";  // Affiche le message de confirmation vert 
+            }else{              
+              alert("Une erreur est survenue lors de l'envoi du message. Merci de bien vouloir réessayer ultérieurement.");
+            }            
+          });
+          // .catch(err => { // Inutile car le try catch est déjà effectif dans l'API.
+          //   alert("onSubmit ERR- Problème lors de l'envoie du mail : " + err ); //TODEL
+          //   // alert("Une erreur est survenue lors de l'envoi du message. Merci de bien vouloir réessayer ultérieurement.");
+          // });
+      },
+    });
+
     return (
-      <form onSubmit={sendContactMessage} class="space-y-4">
+      <form class="space-y-4" onSubmit={formik.handleSubmit} noValidate >
         <div class="flex flex-wrap mx-20 space-y-1 md:space-y-5 ">
           <label htmlFor="nom" className={s.ojlabel} >Nom</label>
           <div class="flex flex-shrink w-full space-x-4">
-            <input id="nom" type="text" autoComplete="Nom" className={s.ojinput} placeholder="nom" />
-            <input id="prenom" type="text" autoComplete="Prenom" className={s.ojinput} placeholder="prénom" />           
+            <input id="nom" type="text" autoComplete="family-name" className={s.ojinput} placeholder="nom" {...formik.getFieldProps('nom')} />
+            {formik.touched.nom && formik.errors.nom ? <div className={s.errorText}>{formik.errors.nom}</div> : null}
+            <input id="prenom" type="text" autoComplete="given-name" className={s.ojinput} placeholder="prénom" {...formik.getFieldProps('prenom')} />
+            {formik.touched.prenom && formik.errors.prenom ? <div className={s.errorText}>{formik.errors.prenom}</div> : null}
           </div>
           <div class="w-full">
             <label htmlFor="email" className={s.ojlabel} >Email <span className={s.ojetoilerouge}>*</span></label>
-            <input id="email" type="text" autoComplete="Email" className={s.ojinput} required />
+            <input id="email" type="text" autoComplete="email" className={ formik.touched.email && formik.errors.email ? s.ojinputInvalid : s.ojinput } {...formik.getFieldProps('email')} />
+            {formik.touched.email && formik.errors.email ? <div className={s.errorText}>{formik.errors.email}</div> : null}
           </div>
           <div class="w-full">
             <label htmlFor="message" className={s.ojlabel} >Message <span className={s.ojetoilerouge}>*</span></label>
-            <textarea id="message" type="text" autoComplete="Votre Message..." className={s.ojinput} required />
+            <textarea id="message" type="text" autoComplete="Votre Message..." className={ formik.touched.message && formik.errors.message ? s.ojinputInvalid : s.ojinput } {...formik.getFieldProps('message')} />
+            {formik.touched.message && formik.errors.message ? <div className={s.errorText}>{formik.errors.message}</div> : null}
           </div>
           <div class="w-full">
             <label htmlFor="tel" >Téléphonne</label>
-            <input id="tel" type="text" className={s.ojinput} autoComplete="" />
+            <input id="tel" type="text" autoComplete="tel" className={ formik.touched.tel && formik.errors.tel ? s.ojinputInvalid : s.ojinput } {...formik.getFieldProps('tel')} />
+            {formik.touched.tel && formik.errors.tel ? <div className={s.errorText}>{formik.errors.tel}</div> : null}          
           </div>
           <div class="flex flex-wrap w-full">
             <div class="flex flex-col flex-none">
@@ -119,8 +166,42 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        
+      
       </form>
     )
   }
   
+  const validate = values => {
+    const errors = {};
+    if (!values.email) {
+      errors.email = 'Email requis...';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = 'Format d\'email incorrect.';
+    }  
+
+    if (!values.message) {
+      errors.message = 'Merci de bien vouloir saisir votre message.';
+    } else if (values.message.length < 5) {
+      errors.message = 'Ce message est un peu court...';
+    }
+
+    if (values.tel && !/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/i.test(values.tel)) {
+      errors.tel = 'Format de téléphone incorrect.';
+    }
+  
+  /* Garder pour l'exemple
+    if (values.nom.length > 15) {
+      errors.nom = 'Ne doit pas dépassé les 15 caractères';
+    }
+  
+    if (values.prenom.length > 20) {
+      errors.prenom = 'Ne doit pas dépassé les 20 caractères';
+    }
+  */
+    if(errors)
+    {
+      document.getElementById('confirmMessage').style.visibility="hidden";
+    }
+    return errors;
+  };
+

@@ -19,6 +19,7 @@
     "lodash.get": "^4.4.2",
     "lodash.has": "^4.5.2",
     "next": "^10.1.1",
+    "nodemailer": "^6.5.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^6.7.0",
     "react": "17.0.2",
