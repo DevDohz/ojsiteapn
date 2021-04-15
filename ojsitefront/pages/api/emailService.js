@@ -44,7 +44,7 @@ export default async (req, res) => {
   try{
     const infoReturn = await transporter.sendMail(emessage);
     console.log("TRY OK- email service - MessageId : " + infoReturn.messageId);
-    console.log("TRY OK- email service - infoReturn : " + JSON.stringify(infoReturn));
+    // console.log("TRY OK- email service - infoReturn : " + JSON.stringify(infoReturn));
     return res.status(222).send({messId: infoReturn.messageId});    
   } 
   catch (err) {

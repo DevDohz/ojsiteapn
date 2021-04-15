@@ -30,8 +30,8 @@ export default function Contact() {
       </div>
 
      {/* Carte Google Maps sur OpenJujitsu */}
-     {/* */} <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.7854620819835!2d-0.6610626842099919!3d44.80556067909877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54d973488db243%3A0xe5e17d0cc266689a!2sOpen%20Jujitsu!5e0!3m2!1sfr!2sfr!4v1616939727833!5m2!1sfr!2sfr" 
-        width="95%" height="400" style={{ border: 0 }} allowfullscreen="" loading="lazy" class="m-auto pb-4 pt-4"/>
+     {/**/}  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.7854620819835!2d-0.6610626842099919!3d44.80556067909877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54d973488db243%3A0xe5e17d0cc266689a!2sOpen%20Jujitsu!5e0!3m2!1sfr!2sfr!4v1616939727833!5m2!1sfr!2sfr" 
+        width="95%" height="400" style={{ border: 0 }} allowFullScreen="" loading="lazy" class="m-auto pb-4 pt-4"/>
      
     </div>
     
@@ -96,9 +96,15 @@ export default function Contact() {
 
     return resp; // retourne la promesse en asynchrone
   }
-
+  
+  // function captchaCallback () {
+  //   let myCap = document.getElementById('captcha');
+  //   alert('recahptcha');
+  //   //myCap.errors.captcha = '';
+  //   myCap.validate = true;
+  // }
   function ContactForm() {
-    
+
     const formik = useFormik({
       initialValues: {
         nom:'',
@@ -106,10 +112,18 @@ export default function Contact() {
         email: '',
         tel:'',
         message:'',
+        captcha:'',
       },
       validate,
       onSubmit: values => {
         // TODO : Checker le reCaptcha !
+        const captchaOK = grecaptcha.getResponse();
+        if(captchaOK === "")
+        {
+          // alert('Please check the recaptcha');
+          formik.errors.captcha = "Merci de valider le captcha."
+          return false;
+        }
 
         // Envoyer le mail de contact
         sendContactEmail(values)
@@ -159,7 +173,8 @@ export default function Contact() {
           <div class="flex flex-wrap w-full">
             <div class="flex flex-col flex-none">
               <div>Vérification <span className={s.ojetoilerouge}>*</span></div>
-              <div class="g-recaptcha" data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_PUBLICSITE_KEY}></div>
+              <div id="captcha" class="g-recaptcha" data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_PUBLICSITE_KEY } className={ formik.errors.captcha ? s.ojinputInvalid : null} ></div>
+                { formik.errors.captcha ? <div className={s.errorText}>{formik.errors.captcha}</div> : null}
             </div>
             <div class="flex-auto">
               <button type="submit" className={s.ojbouton} >Envoyer le message</button>         
@@ -170,7 +185,7 @@ export default function Contact() {
       </form>
     )
   }
-  
+  // data-callback="captchaCallback"
   const validate = values => {
     const errors = {};
     if (!values.email) {
@@ -188,7 +203,10 @@ export default function Contact() {
     if (values.tel && !/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/i.test(values.tel)) {
       errors.tel = 'Format de téléphone incorrect.';
     }
-  
+    // if (!values.captcha) {
+    //   errors.captcha = 'Merci de valider le captcha.';
+    // }
+
   /* Garder pour l'exemple
     if (values.nom.length > 15) {
       errors.nom = 'Ne doit pas dépassé les 15 caractères';
@@ -203,3 +221,4 @@ export default function Contact() {
     return errors;
   };
 
+  
