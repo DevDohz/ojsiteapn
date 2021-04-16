@@ -41,6 +41,37 @@ export default async (req, res) => {
   //   }
   // });
 
+  // ###############################
+  // Check le Captcha serverSide :
+  const captchaToken = req.body.captcha;
+  if (!captchaToken){
+    console.log("Captcha ERR- email service : Pas de captcha token transmis.");
+    return res.status(550).end();
+  }
+  //Vérifie via Google si le recaptcha est authentique :
+  const fetchOptions = {
+    method: "POST",
+    body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${captchaToken}`,
+    headers: { "Content-type": "application/x-www-form-urlencoded" },
+  };
+  try {
+    const respCaptcha = await fetch("https://www.google.com/recaptcha/api/siteverify",
+      fetchOptions
+    );
+    const respCapJson = await respCaptcha.json();
+    if(!respCapJson.success) {
+      console.log("Captcha ERR- email service : Problème de validation du Captcha coté serveur.");
+      return res.status(551).end();
+    }
+    console.log("Captcha OK (serveurSide) : validation du captcha OK!")    
+  } 
+  catch (err) {
+    console.log("CATCH ERR- email service Captcha : " + err);
+    return res.status(554).send(err);
+  }
+
+  // ###############################
+  // Envoi le mail
   try{
     const infoReturn = await transporter.sendMail(emessage);
     console.log("TRY OK- email service - MessageId : " + infoReturn.messageId);

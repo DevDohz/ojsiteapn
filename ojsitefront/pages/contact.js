@@ -8,6 +8,7 @@ export default function Contact() {
     <>
     {/* Script ReCaptcha Google : à mettre dans le Header de préférence */}
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <div className={s.divcontact}>
       {/* Titre de la page */}
       <p className={s.title}>Nous Rencontrer</p>
@@ -83,9 +84,10 @@ export default function Contact() {
     )
   }
 
-  {/* #########################################
-      ##    Formulaire de Contact            ##
-      #########################################*/}
+  /* #########################################
+     ##    Formulaire de Contact            ##
+     #########################################*/
+  // appel API d'envoie du mail
   async function sendContactEmail(formValues) { 
     // Appel l'API d'envoi de mail
     const resp = await fetch('/api/emailService', {
@@ -96,15 +98,8 @@ export default function Contact() {
 
     return resp; // retourne la promesse en asynchrone
   }
-  
-  // function captchaCallback () {
-  //   let myCap = document.getElementById('captcha');
-  //   alert('recahptcha');
-  //   //myCap.errors.captcha = '';
-  //   myCap.validate = true;
-  // }
-  function ContactForm() {
 
+  function ContactForm() {
     const formik = useFormik({
       initialValues: {
         nom:'',
@@ -116,11 +111,12 @@ export default function Contact() {
       },
       validate,
       onSubmit: values => {
-        // TODO : Checker le reCaptcha !
-        const captchaOK = grecaptcha.getResponse();
-        if(captchaOK === "")
+        // Check le reCaptcha
+        values.captcha = grecaptcha.getResponse();
+        //const captchaOK = grecaptcha.getResponse();
+        //if(captchaOK === "")
+        if(values.captcha === "")
         {
-          // alert('Please check the recaptcha');
           formik.errors.captcha = "Merci de valider le captcha."
           return false;
         }
@@ -133,13 +129,12 @@ export default function Contact() {
             if(isOk.status < 300){
               // Réinitialise le Formulaire
               formik.handleReset(); // réinitialise les champs une fois le formulaire validé
-              document.getElementById('confirmMessage').style.visibility="visible";  // Affiche le message de confirmation vert 
+              document.getElementById('confirmMessage').style.visibility="visible";  // Affiche le message de confirmation vert              
             }else{              
               alert("Une erreur est survenue lors de l'envoi du message. Merci de bien vouloir réessayer ultérieurement.");
             }            
           });
           // .catch(err => { // Inutile car le try catch est déjà effectif dans l'API.
-          //   alert("onSubmit ERR- Problème lors de l'envoie du mail : " + err ); //TODEL
           //   // alert("Une erreur est survenue lors de l'envoi du message. Merci de bien vouloir réessayer ultérieurement.");
           // });
       },
@@ -203,9 +198,6 @@ export default function Contact() {
     if (values.tel && !/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/i.test(values.tel)) {
       errors.tel = 'Format de téléphone incorrect.';
     }
-    // if (!values.captcha) {
-    //   errors.captcha = 'Merci de valider le captcha.';
-    // }
 
   /* Garder pour l'exemple
     if (values.nom.length > 15) {
