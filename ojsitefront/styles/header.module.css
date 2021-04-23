@@ -1,0 +1,7 @@
+.divHeader {
+  background-image: url("/header-background.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  @apply w-9/12 m-auto max-w-7xl;
+}

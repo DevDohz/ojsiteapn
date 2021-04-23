@@ -1,0 +1,8 @@
+
+.divFooter {
+  @apply w-9/12 m-auto max-w-7xl bg-ojwhite;
+}
+
+.myLink {
+  @apply text-ojblack hover:text-ojgreen hover:underline;
+}

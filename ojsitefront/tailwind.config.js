@@ -12,13 +12,17 @@ module.exports = {
         ojblack: '#2c2c2c',
         ojwhite: '#f4f4f4',
       },
-    },
-    
+      textShadow: {
+        'white-lg': '3px 3px 6px rgb(255 255 255 / 26%), 0 0 5px rgb(255 255 255 / 22%)',
+      },
+    },    
   },
   variants: {
     extend: {
       fontWeight: ['hover', 'focus'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-textshadow')
+  ],
 }
