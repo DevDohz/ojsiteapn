@@ -33,3 +33,7 @@ a.over {
 .textOJsoulignerNoir {
   text-decoration: underline #2c2c2c;
 }
+
+.pageSized {
+  @apply w-11/12 m-auto max-w-7xl;
+}

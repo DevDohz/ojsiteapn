@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (   
-    <footer className={s.divFooter} >
+    <footer className={s.divFooter, "pageSized"} >
       <Image
         src="/footer-separateur vert.png"
         alt="Open Jujitsu Self Defense Logo"
@@ -31,7 +31,7 @@ export default function Footer() {
           {/* TODO mettre la bonne page */}
           <Link href="/contact"> 
             <a className={s.myLink}>Infos légales</a>
-          </Link>        
+          </Link>
           <p>-</p>
           {/* TODO mettre la bonne page */}
           <Link href="/contact"> 

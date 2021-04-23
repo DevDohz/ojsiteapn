@@ -1,6 +1,5 @@
-
 .divFooter {
-  @apply w-9/12 m-auto max-w-7xl bg-ojwhite;
+  @apply bg-ojwhite;
 }
 
 .myLink {
