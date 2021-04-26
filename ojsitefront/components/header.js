@@ -7,7 +7,7 @@ import s from '../styles/header.module.css'
 
 export default function Header() {
   return (
-    <div className={s.divHeader, "pageSized"} >
+    <div className={s.divHeader}>
       <Head>
           <title>{process.env.SITE_NAME_OJ}</title>
           <link rel="icon" href="/favicon.ico" />
@@ -19,23 +19,25 @@ export default function Header() {
         <div class="flex flex-row">
           <div class="flex-none">
             <Link href="/">
-              <a>
-                <Image
+              <a> 
+                <img src="/Header- LogoTexte losange blanc.png" alt="Open Jujitsu Logo"  width={287} height={150} />
+                {/* <Image
                   src="/Header- LogoTexte losange blanc.png"
                   alt="Open Jujitsu Logo"
-                  width={300}
+                  width={287}
                   height={150}
-                />
+                  priority
+                /> */}
               </a>
             </Link>
           </div>
-          <div class="flex-auto m-auto hidden md:flex font-bold text-shadow-white-lg bg-ojwhite bg-opacity-70 rounded-r-md" >
+          <div class="flex-auto m-auto hidden md:flex font-bold bg-ojwhite bg-opacity-70 rounded-r-md" >
             <p>Du Jujitsu Self-Défense et tellement plus...</p>
           </div>
         </div>
 
         {/* intégration du Menu (+ menu burger en mode mobile) */}
-        <div class="flex-grow self-end bg-red-400">
+        <div class="flex-grow self-end">
           <Menumain />
         </div>
       </div>

@@ -2,9 +2,15 @@
   background-image: url("/header-background.png");
   background-repeat: no-repeat;
   background-size: auto;
+
+  @apply w-11/12 m-auto max-w-7xl;
 }
 
 /* MENU */
 .myLink {
   @apply text-2xl text-ojblack bg-opacity-80 bg-ojwhite hover:text-ojwhite hover:bg-ojblack hover:bg-opacity-80;
+}
+
+.myImage {
+  @apply bg-red-500 block;
 }

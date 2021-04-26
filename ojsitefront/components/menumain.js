@@ -5,34 +5,49 @@ import s from '../styles/header.module.css'
 export default function Menumain() {
   return (
     /* MENU version ORDI */
-    <div>
-      {/* TODO mettre la bonne page */}
-      <Link href="/news"> 
-        <a className={s.myLink}>News</a>
-      </Link>
+    <div class="flex flex-row space-x-2">
+      <div className={"flex-none"}>        
+        {/* TODO mettre la bonne page */}
+        <Link href="/news"> 
+          <a className={s.myLink}>News</a>
+        </Link>
+      </div>
+
+      <div className={"flex-none"}> 
       {/* TODO mettre la bonne page */}
       <Link href="/events"> 
         <a className={s.myLink}>Evènements</a>
       </Link>
+      </div>
+      <div className={"flex-none"}> 
       {/* TODO mettre la bonne page */}
       <Link href="/media"> 
         <a className={s.myLink}>Média</a>
       </Link>
+      </div>
+      <div className={"flex-none"}> 
       {/* TODO mettre la bonne page */}
       <Link href="/jujitsu"> 
         <a className={s.myLink}>le Ju-jitsu</a>
       </Link>
+      </div>
+      <div className={"flex-none"}> 
       {/* TODO mettre la bonne page */}
       <Link href="/club"> 
         <a className={s.myLink}>le Club</a>
       </Link>
+      </div>
+      <div className={"flex-none"}> 
       {/* TODO mettre la bonne page */}
       <Link href="/contact"> 
         <a className={s.myLink}>Contact</a>
       </Link>
+      </div>
+      <div className={"flex-none"}> 
       {/* TODO mettre la bonne page */}
       <Link href="/liens"> 
         <a className={s.myLink}>Liens</a>
       </Link>
+      </div>
     </div>
   )}

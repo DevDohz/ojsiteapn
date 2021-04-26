@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (   
-    <footer className={s.divFooter, "pageSized"} >
+    <footer className={s.divFooter} >
       <Image
         src="/footer-separateur vert.png"
         alt="Open Jujitsu Self Defense Logo"
