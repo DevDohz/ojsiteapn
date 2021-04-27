@@ -20,9 +20,9 @@ export default function Header() {
           <div class="flex-none">
             <Link href="/">
               <a> 
-                <img src="/Header- LogoTexte losange blanc.png" alt="Open Jujitsu Logo"  width={287} height={150} />
+                <img src="/header-LogoTexte-losange-blanc.png" alt="Open Jujitsu Logo"  width={287} height={150} />
                 {/* <Image
-                  src="/Header- LogoTexte losange blanc.png"
+                  src="/header-LogoTexte-losange-blanc.png"
                   alt="Open Jujitsu Logo"
                   width={287}
                   height={150}

@@ -35,9 +35,9 @@ a.over {
 }
 
 .errorPageRouting {
-  background-image: url("/error-encapsulation.jpg");
+  background-image: url("/error-encapsulation.png");
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: 208px;
 
-  @apply bg-purple-700;
+  @apply text-5xl h-52 w-52 pt-24 pl-24;
 }
