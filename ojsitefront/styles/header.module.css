@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-size: auto;
 
-  @apply w-11/12 m-auto max-w-7xl;
+  @apply w-11/12 m-auto max-w-7xl mb-2;
 }
 
 /* MENU */

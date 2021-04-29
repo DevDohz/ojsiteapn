@@ -1,15 +1,16 @@
-import Link from 'next/link'
+import OJLayout from '../components/layout'
 import Image from 'next/image'
 import s from '../styles/contact.module.css'
 import { useFormik } from 'formik';
 
+
 export default function Contact() {
     return (
-    <>
+    <OJLayout>
     {/* Script ReCaptcha Google : à mettre dans le Header de préférence */}
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <div className={s.divcontact}>
+    <div className={s.divcontact} >
       {/* Titre de la page */}
       <p className={s.title}>Nous Rencontrer</p>
       <div class="grid sm:grid-cols-2 sm:divide-x-2 sm:divide-y-0 divide-y-2 divide-ojgreen text-center">
@@ -74,13 +75,7 @@ export default function Contact() {
         <ContactForm />
       </div>
 
-      {/* Faux Footer */}
-      <h4 class="py-4 ml-96">
-        <Link href="/">
-          <a>← retour à l'accueil</a>
-        </Link>
-      </h4>
-    </>
+      </OJLayout>
     )
   }
 
