@@ -16,3 +16,17 @@ export default function Layout (page) {
     </div>
   );
 };
+
+// const Layout = props => (
+//   <div className="flex flex-col h-screen">
+//     <div className="flex-none">
+//       <Header />
+//     </div>
+//     <main className="flex-1 overflow-y-auto">
+//       {props.children}
+//       <Footer />
+//     </main>
+//   </div>
+// );
+
+// export default Layout;

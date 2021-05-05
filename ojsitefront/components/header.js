@@ -32,7 +32,7 @@ export default function Header() {
               </a>
             </Link>
           </div>
-          <div className="flex-auto m-auto hidden md:flex font-bold bg-ojwhite bg-opacity-70 rounded-r-md" >
+          <div className="flex-auto m-auto hidden lg:flex font-bold bg-ojwhite bg-opacity-70 rounded-r-md" >
             <p>Du Jujitsu Self-Défense et tellement plus...</p>
           </div>
         </div>
