@@ -12,5 +12,5 @@
 }
 
 .myImage {
-  @apply bg-red-500 block;
+  @apply opacity-80;
 }
