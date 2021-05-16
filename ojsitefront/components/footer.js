@@ -11,9 +11,9 @@ export default function Footer() {
         width={1620}
         height={30}
       />    
-      <div class="flex flex-row -mt-5">
+      <div className="flex flex-row -mt-5">
         {/* Logo OJSD fixe */}
-        <div class="flex-none self-center">
+        <div className="flex-none self-center">
           <Image
             src="/footer-ojsd.png"
             alt="Open Jujitsu Self Defense Logo"
@@ -23,7 +23,7 @@ export default function Footer() {
         </div>
 
         {/* Menu simple espacé */}
-        <div class="flex-grow flex space-x-4 self-center place-content-center sm:visible invisible" >
+        <div className="flex-grow flex space-x-4 self-center place-content-center sm:visible invisible" >
           <Link href="/contact">
             <a className={s.myLink}>Contact</a>
           </Link>
@@ -40,9 +40,9 @@ export default function Footer() {
         </div>
 
         {/* Info réccap OJ */}
-        <div class="flex-shrink mr-0 text-center sm:visible invisible">
-          <p class="text-xl"><span class="font-bold">Open</span> <span class="text-ojgreen">Jujitsu</span></p>
-          <p>contact<span class="text-ojgreen">@</span>openjujitsu<span class="text-ojgreen">.</span>fr</p>
+        <div className="flex-shrink mr-0 text-center sm:visible invisible">
+          <p className="text-xl"><span className="font-bold">Open</span> <span className="text-ojgreen">Jujitsu</span></p>
+          <p>contact<span className="text-ojgreen">@</span>openjujitsu<span className="text-ojgreen">.</span>fr</p>
           <p>51 avenue de Madran, 33600 Pessac</p>
         </div>      
       </div>

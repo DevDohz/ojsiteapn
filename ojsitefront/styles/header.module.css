@@ -11,6 +11,10 @@
   @apply text-2xl text-ojblack bg-opacity-80 bg-ojwhite hover:text-ojwhite hover:bg-ojblack hover:bg-opacity-80 flex-none;
 }
 
+.myLink.active {
+  @apply text-2xl text-ojblack bg-opacity-100 bg-ojwhite flex-none hover:text-ojwhite hover:bg-ojblack hover:bg-opacity-80;
+}
+
 .myImage {
   @apply opacity-80;
 }
